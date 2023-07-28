@@ -237,4 +237,34 @@ public class DirectoryOrFile {
             }
         }
     }
+
+    /**
+     * Checks if the equality of two DirectoryOrFile objects based on their names and types.
+     *
+     * @param obj
+     *      Object being compared to current instance.
+     *
+     * @return
+     *      True if two DirectoryOrFile objects has the same name and type, otherwise false.
+     */
+    @Override
+    public boolean equals(Object obj){
+        if(obj == this) return true;
+        if(!(obj instanceof DirectoryOrFile)) return false;
+
+        DirectoryOrFile objAsDF = (DirectoryOrFile) obj;
+
+        return (isFile == objAsDF.isFile && name.equals(objAsDF.name));
+    }
+
+    /**
+     * Returns a string representation of the DirectoryOrFile object.
+     *
+     * @return
+     *      A string representation of the DirectoryOrFile object in the format of "type: name"
+     */
+    @Override
+    public String toString(){
+        return (isFile ? "File" : "Directory") + ": " + name;
+    }
 }
