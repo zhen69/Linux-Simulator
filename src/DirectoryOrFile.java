@@ -1,6 +1,7 @@
 package src;
 
 import java.util.Arrays;
+import java.util.InputMismatchException;
 
 /**
  * The DirectoryOrFile class represents a directory/file object. It contains information such as the name
@@ -183,7 +184,7 @@ public class DirectoryOrFile {
             if(df != null)
                 str.append(df.name).append(" ");
 
-        if(str.length() > 0)
+        if(!str.isEmpty())
             return str.toString();
         else
             return "Current directory has no directories/files.";
@@ -208,10 +209,10 @@ public class DirectoryOrFile {
             System.out.println(indent + "- " + name);
         else{
             System.out.println(indent + "|- " + name);
-
+            height++;
             for(DirectoryOrFile df : childrenDF){
                 if(df != null)
-                    df.printStructure(++height);
+                    df.printStructure(height);
             }
         }
     }
@@ -267,22 +268,33 @@ public class DirectoryOrFile {
     /**
      * Removes a directory/file with the input name from the current instance.
      *
-     * @param removeDF
+     * @param df
      *      A string indicating the name of the directory/file to be removed.
+     *
+     * @param directory
+     *      True if <code>df</code> is a directory, false if <code>df</code> is a file.
      *
      * @return
      *      If present in the current instance, returns the removed DirectoryOrFile object,
      *      otherwise null.
+     *
+     * @throws InputMismatchException
+     *      when <code>directory</code> indicates <code>df</code> is a directory but the actual
+     *      object is a file.
+     *      Or, when <code>directory</code> indicates <code>df</code> is a file but the actual
+     *      object is a directory.
      */
-    public DirectoryOrFile removeChild(String removeDF){
-        if(removeDF == null)
+    public DirectoryOrFile removeChild(String df, boolean directory){
+        if(df == null || df.isEmpty())
             return null;
 
         for(int i = 0; i < childrenDF.length; i++){
-            if(childrenDF[i] != null && childrenDF[i].name.equals(removeDF)) {
-                DirectoryOrFile removed = childrenDF[i];
+            if(childrenDF[i] != null && childrenDF[i].name.equals(df)) {
+                DirectoryOrFile removedDF = childrenDF[i];
+                if((!removedDF.isFile && !directory) || (directory && removedDF.isFile))
+                    throw new InputMismatchException("Error: Can't remove \"" + df + "\".");
                 shift(i);
-                return removed;
+                return removedDF;
             }
         }
         return null;
