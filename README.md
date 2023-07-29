@@ -5,4 +5,4 @@ Language Used: Java
 
 Concepts: Basics of Linux, Object-Oriented Programming, and Data Structure (Custom Tree Structure where each node has a maximum of 10 children).
 
-Restrictions: Despite the Scanner class, no API classes are allowed when implementing this project.
+Restrictions: No API classes are allowed despite the Scanner and Array classes.
