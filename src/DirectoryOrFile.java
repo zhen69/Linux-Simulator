@@ -102,7 +102,7 @@ public class DirectoryOrFile {
     }
 
     /**
-     * Modifier. Modifies the contents/childrenDF of the current instance.
+     * Modifier. Modifies the contents/children of the current instance.
      *
      * @param childrenDF
      *      Array containing other DirectoryOrFile objects that connects to the current instance.
