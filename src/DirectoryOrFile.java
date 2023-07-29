@@ -1,18 +1,21 @@
 package src;
 
+import java.util.Arrays;
+
 /**
  * The DirectoryOrFile class represents a directory/file object. It contains information such as the name
- * of the instance, the path to it, the indicator of whether it's a directory or not,
- * and all the directories/files that are contained in the instance.
+ * of the instance, the path to it, an indicator of whether it's a directory or not, a pointer to its parent
+ * directory, and all the directories/files that are contained in the instance.
  *
  * @author Zhen Wei Liao
  */
 public class DirectoryOrFile {
     private String name;
     private boolean isFile = false;
-    private DirectoryOrFile[] links = new DirectoryOrFile[10];
+    private DirectoryOrFile[] childrenDF = new DirectoryOrFile[10];
     private String path = "root";
     private int numOfChildren = 0;
+    private DirectoryOrFile parent = null;
 
 
     /**
@@ -94,18 +97,18 @@ public class DirectoryOrFile {
      * @return
      *      Array containing other DirectoryOrFile objects that connects to the current instance.
      */
-    public DirectoryOrFile[] getLinks() {
-        return links;
+    public DirectoryOrFile[] getChildrenDF() {
+        return childrenDF;
     }
 
     /**
-     * Modifier. Modifies the contents/links of the current instance.
+     * Modifier. Modifies the contents/childrenDF of the current instance.
      *
-     * @param links
+     * @param childrenDF
      *      Array containing other DirectoryOrFile objects that connects to the current instance.
      */
-    public void setLinks(DirectoryOrFile[] links) {
-        this.links = links;
+    public void setChildrenDF(DirectoryOrFile[] childrenDF) {
+        this.childrenDF = childrenDF;
     }
 
     /**
@@ -129,10 +132,18 @@ public class DirectoryOrFile {
     }
 
     /**
-     * Indicates whether the current instance has reached a maximum of 10 links.
+     * Accessor. Returns the parent directory of the current instance.
      *
      * @return
-     *      True if the instance has exactly 10 links, false otherwise.
+     *      Parent Directory of the current instance.
+     */
+    public DirectoryOrFile getParent(){ return parent;}
+
+    /**
+     * Indicates whether the current instance has reached a maximum of 10 childrenDF.
+     *
+     * @return
+     *      True if the instance has exactly 10 childrenDF, false otherwise.
      */
     public boolean isFull(){
         return (numOfChildren == 10);
@@ -146,7 +157,7 @@ public class DirectoryOrFile {
      *
      */
     public DirectoryOrFile find(String name){
-        for(DirectoryOrFile df : links){
+        for(DirectoryOrFile df : childrenDF){
             if(df != null && df.name.equals(name))
                 return df;
         }
@@ -157,18 +168,18 @@ public class DirectoryOrFile {
      * Returns a string representation of all the directories/files that are inside the current instance.
      *
      * @return
-     *      A space-separated string containing all the names of the linked directories/files.
+     *      A space-separated string containing all the names of the children directories/files.
      *
      * @throws IllegalArgumentException
      *      when method is called on a file.
      */
-    public String printLinks(){
+    public String printChildrenDF(){
         if(isFile)
             throw new IllegalArgumentException("Error: File cannot contain directories/files.");
 
         StringBuilder str = new StringBuilder();
 
-        for(DirectoryOrFile df : links)
+        for(DirectoryOrFile df : childrenDF)
             if(df != null)
                 str.append(df.name).append(" ");
 
@@ -198,7 +209,7 @@ public class DirectoryOrFile {
         else{
             System.out.println(indent + "|- " + name);
 
-            for(DirectoryOrFile df : links){
+            for(DirectoryOrFile df : childrenDF){
                 if(df != null)
                     df.printStructure(++height);
             }
@@ -208,34 +219,73 @@ public class DirectoryOrFile {
     /**
      * Adds a directory/file to the current instance.
      *
-     * @param newLink
+     * @param newChild
      *      A DirectoryOrFile object connecting to the current instance.
      *
      * @throws FullDirectoryException
-     *      when the current instance has reached a maximum of 10 links.
+     *      when the current instance has reached a maximum of 10 childrenDF.
      *
      * @throws NotADirectoryException
      *      when the current instance is a file.
      */
-    public void addLink(DirectoryOrFile newLink) throws FullDirectoryException, NotADirectoryException{
+    public void addChild(DirectoryOrFile newChild) throws FullDirectoryException, NotADirectoryException{
         if(isFile)
             throw new NotADirectoryException("Error: Cannot add directory/file to a file.");
 
         if(isFull())
             throw new FullDirectoryException("Error: Current directory is full.");
 
-        if(find(newLink.name) != null)
-            throw new IllegalArgumentException("Error: Directory/File \"" + newLink.name +
+        if(find(newChild.name) != null)
+            throw new IllegalArgumentException("Error: Directory/File \"" + newChild.name +
                     "\" already existed in the current directory.");
 
-        for(int i = 0; i < links.length; i++){
-            if(links[i] == null){
-                newLink.setPath(path + "/" + newLink.name);
-                links[i] = newLink;
+        for(int i = 0; i < childrenDF.length; i++){
+            if(childrenDF[i] == null){
+                newChild.setPath(path + "/" + newChild.name);
+                newChild.parent = this;
+                childrenDF[i] = newChild;
                 numOfChildren++;
                 break;
             }
         }
+    }
+
+    /**
+     * Helper method for removeLink.
+     * Shifts all items with an index greater than <code>position</code> to the left by one unit.
+     *
+     * @param position
+     *      Index of the removed DirectoryOrFile object.
+     */
+    private void shift(int position){
+        int len = childrenDF.length;
+        for(int i = position; i < len - 1; i++)
+            childrenDF[i] = childrenDF[i+1];
+        childrenDF[len - 1] = null;
+    }
+
+    /**
+     * Removes a directory/file with the input name from the current instance.
+     *
+     * @param removeDF
+     *      A string indicating the name of the directory/file to be removed.
+     *
+     * @return
+     *      If present in the current instance, returns the removed DirectoryOrFile object,
+     *      otherwise null.
+     */
+    public DirectoryOrFile removeChild(String removeDF){
+        if(removeDF == null)
+            return null;
+
+        for(int i = 0; i < childrenDF.length; i++){
+            if(childrenDF[i] != null && childrenDF[i].name.equals(removeDF)) {
+                DirectoryOrFile removed = childrenDF[i];
+                shift(i);
+                return removed;
+            }
+        }
+        return null;
     }
 
     /**
@@ -254,7 +304,8 @@ public class DirectoryOrFile {
 
         DirectoryOrFile objAsDF = (DirectoryOrFile) obj;
 
-        return (isFile == objAsDF.isFile && name.equals(objAsDF.name));
+        return (isFile == objAsDF.isFile && name.equals(objAsDF.name)
+                && Arrays.equals(childrenDF, objAsDF.childrenDF));
     }
 
     /**
