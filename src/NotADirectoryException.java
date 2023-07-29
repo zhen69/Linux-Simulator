@@ -3,6 +3,8 @@ package src;
 /**
  * The NotADirectoryException class inherit all behaviors and properties of the Exception class. This exception
  * is thrown when an object is not a directory.
+ *
+ * @author Zhen Wei Liao
  */
 public class NotADirectoryException extends Exception {
     /**

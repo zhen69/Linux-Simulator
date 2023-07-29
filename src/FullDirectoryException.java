@@ -2,7 +2,9 @@ package src;
 
 /**
  * The FullDirectoryException class inherit all behaviors and properties of the Exception class. This exception
- * is thrown when a Directory has reached the maximum number of links.
+ * is thrown when a Directory has reached the maximum number of children directories/files.
+ *
+ * @author Zhen Wei Liao
  */
 public class FullDirectoryException extends Exception {
     /**
