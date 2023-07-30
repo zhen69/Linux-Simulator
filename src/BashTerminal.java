@@ -12,6 +12,15 @@ public class BashTerminal {
     private static DirectoryTree structure;
     private static Scanner input;
 
+    /**
+     * Determines which ls command (ls or ls -R) should be run based on the argument <code>arg</code>.
+     *
+     * @param arg
+     *      Argument of the ls command.
+     *
+     * @throws IllegalArgumentException
+     *      when the entered argument is invalid for ls.
+     */
     private static void lsCommand(String arg){
         if(arg == null)
             System.out.println(structure.listDirectoryFile());
@@ -24,9 +33,20 @@ public class BashTerminal {
             throw new IllegalArgumentException("Error: Invalid ls command.");
     }
 
+    /**
+     * Determines which cd command (cd, cd .., cd /, or cd path) should be run based on the argument <code>arg</code>.
+     *
+     * @param arg
+     *      Argument of the cd command.
+     *
+     * @throws IllegalArgumentException
+     *      when the entered argument is empty/null.
+     *
+     */
     private static void cdCommand(String arg) throws NotADirectoryException, DFNotFoundException {
         if(arg == null)
             throw new IllegalArgumentException("Error: Invalid cd command.");
+
         if(arg.equals("/"))
             structure.resetCursor();
         else if(arg.contains("/"))
@@ -37,6 +57,16 @@ public class BashTerminal {
             structure.changeDirectory(arg);
     }
 
+    /**
+     * Runs the mv command by taking <code>paths[0]</code> as the source path and <code>paths[1]</code>
+     * as the destination path.
+     *
+     * @param paths
+     *      A String array containing the absolute paths for both source and destination.
+     *
+     * @throws IllegalArgumentException
+     *      when more/less than 2 paths are entered.
+     */
     private static void mvCommand(String[] paths) throws DFNotFoundException, NotADirectoryException,
             FullDirectoryException {
         if(paths.length != 2)
@@ -44,6 +74,19 @@ public class BashTerminal {
         structure.move(paths[0], paths[1]);
     }
 
+    /**
+     * Determines which rm command should be run (rm or rm -r)
+     * based on the <code>args[0]</code> and <code>args[1]</code>.
+     * <code>args[2], args[3], args[4]...</code> indicates the directories/files to be removed
+     * from the working directory.
+     *
+     * @param args
+     *      A String array indicating which rm commands should be run and which directories/files should
+     *      be removed.
+     *
+     * @throws IllegalArgumentException
+     *      when <code>args</code> is empty.
+     */
     private static void rmCommand(String[] args) throws DFNotFoundException {
         int len = args.length;
         if(len == 0)
@@ -58,6 +101,15 @@ public class BashTerminal {
             structure.remove(args[i], removeDirectory);
     }
 
+    /**
+     * Determines which command is entered and processes the corresponding method/operation.
+     *
+     * @param cmd
+     *      The command part of the user input.
+     *
+     * @param args
+     *      Arguments of the input command.
+     */
     private static void commands(String cmd, String args) throws NotADirectoryException, FullDirectoryException,
             DFNotFoundException {
         switch (cmd) {
@@ -73,6 +125,19 @@ public class BashTerminal {
         }
     }
 
+    /**
+     * Based on the input command <code>cmd</code>, determines whether the system should
+     * continue to run or terminate.
+     *
+     * @param cmd
+     *      Command input by the user.
+     *
+     * @return
+     *      True if continues to run the bash terminal, otherwise false.
+     *
+     * @throws IllegalArgumentException
+     *      when <code>cmd</code> is null/empty.
+     */
     private static boolean runCommands(String cmd) throws NotADirectoryException, FullDirectoryException,
             DFNotFoundException {
         if(cmd == null || cmd.isEmpty())
@@ -89,7 +154,13 @@ public class BashTerminal {
         return true;
     }
 
-    private static void startTerminal(String user){
+    /**
+     * Takes input from the user and runs the system.
+     *
+     * @param user
+     *      Username.
+     */
+    private static void startLinux(String user){
         while(true){
             System.out.print(user + ": ~/" + structure.getCursor().getPath() + "$ ");
             try{
@@ -105,12 +176,15 @@ public class BashTerminal {
         }
     }
 
+    /**
+     * Starts the bash terminal by asking the user to input a username.
+     */
     public static void main(String[] args){
         structure = new DirectoryTree();
         System.out.println("Starting Bash Terminal...");
         System.out.print("Please enter a username: ");
         input = new Scanner(System.in);
         String user = input.nextLine().trim() + "@my-doge-ate-my-program";
-        startTerminal(user);
+        startLinux(user);
     }
 }
