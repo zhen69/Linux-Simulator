@@ -292,7 +292,8 @@ public class DirectoryOrFile {
             if(childrenDF[i] != null && childrenDF[i].name.equals(df)) {
                 DirectoryOrFile removedDF = childrenDF[i];
                 if((!removedDF.isFile && !directory) || (directory && removedDF.isFile))
-                    throw new InputMismatchException("Error: Can't remove \"" + df + "\".");
+                    throw new InputMismatchException("Error: Can't remove \"" + df + "\": Is "
+                            + (removedDF.isFile ? "File" : "Directory"));
                 shift(i);
                 return removedDF;
             }
