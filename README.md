@@ -1,5 +1,5 @@
 # Linux-Simulator
-As Linux gains popularity in the tech industry, many companies expect individuals to at least have some basic knowledge of it. Hence, the purpose of this project is to help individuals learn Linux by playing with command lines like pwd, ls, mkdir, touch, cd, and mv.
+As Linux gains popularity in the tech industry, many companies expect individuals to at least have some basic knowledge of it. Hence, the purpose of this project is to help individuals learn Linux by playing with command lines like pwd, ls, mkdir, touch, cd, find, rm, and mv.
 
 Language Used: Java
 
