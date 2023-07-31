@@ -1,8 +1,8 @@
 # Linux-Simulator
-As Linux gains popularity in the tech industry, many companies expect individuals to at least have some basic knowledge of it. Hence, the purpose of this project is to help individuals learn Linux by playing with command lines like pwd, ls, mkdir, touch, cd, find, rm, and mv.
+<p>As Linux gains popularity in the tech industry, many companies expect individuals to at least have some basic knowledge of it. Hence, the purpose of this project is to help individuals learn Linux by playing with command lines like pwd, ls, mkdir, touch, cd, find, rm, and mv.</p>
 
-Language Used: Java
+<b>Language Used:</b> Java
 
-Concepts: Basics of Linux, Object-Oriented Programming, and Data Structure (Custom Tree Structure where each node has a maximum of 10 children).
+<b>Concepts:</b> Basics of Linux, Object-Oriented Programming, and Data Structure (Custom Tree Structure where each node has a maximum of 10 children).
 
-Restrictions: No API classes are allowed despite the Scanner and Array classes.
+<b>Restrictions:</b> No API classes are allowed despite the Scanner and Array classes.
