@@ -1,5 +1,6 @@
 # Linux-Simulator
 Developed a simple Linux model that helps individuals to learn the basics of Linux.
+
 <h2>Description</h2>
 As Linux gains popularity in the tech industry, many companies expect individuals to at least have some basic knowledge of it. Hence, I have developed this project to help individuals learn Linux by playing with command lines like pwd, ls, mkdir, touch, cd, find, rm, and mv.
 <br><br>
@@ -17,6 +18,9 @@ As Linux gains popularity in the tech industry, many companies expect individual
     <li><a href="https://replit.com/~">Repl.it</a></li>
   </ul>
 </ul>
+
+<h3>Installation</h3>
+Visit the src directory to see all the required Java files. To run the program, individuals must download those files and put them in the same directory.
 
 <h3>Executing program</h3>
 Run directly in IDEs
@@ -44,7 +48,7 @@ Do the following in the terminal (the following example is run in the Windows Po
   <li>Compile the file you want to execute. Let's call this file "RunMe.java"</li>
   <code>C:\Users\anon\JavaProgram> javac RunMe.java</code>
   <br>
-  This will create the class file "RunMe.class"
+  This will create the class file "RunMe.class."
   <br><br>
   <li>Run the program</li>
   <code>C:\Users\anon\JavaProgram> java RunMe.java</code>
