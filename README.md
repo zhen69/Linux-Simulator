@@ -3,7 +3,7 @@ Developed a simple Linux model that helps individuals to learn the basics of Lin
 
 <h2>Description</h2>
 As Linux gains popularity in the tech industry, many companies expect individuals to at least have some basic knowledge of it. Hence, I have developed this project to help individuals learn Linux by playing with command lines like pwd, ls, mkdir, touch, cd, find, rm, and mv.
-<br><br>
+
 <h2>Get Started</h2>
 <h3>Dependencies</h3>
 <ul>
