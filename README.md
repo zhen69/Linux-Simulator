@@ -19,14 +19,26 @@ As Linux gains popularity in the tech industry, many companies expect individual
   </ul>
 </ul>
 
-<h3>Installation</h3>
-Visit the src directory to see all the required Java files. To run the program, individuals must download those files and put them in the same directory.
+<h3>Installing</h3>
+Download the src directory
+<br><br>
+Or
+<br><br>
+
+Do the following:
+
+<ol>
+    <li>Fork this repository by clicking the Fork button located on the top of the page</li>
+    <li>Navigate to "Your Repositories" on GitHub and open the forked repo</li>
+    <li>In the terminal, git clone the repo using the URL or SSH key</li>
+</ol>
+<strong>Reference: </strong><a href="https://docs.github.com/en/get-started/quickstart/fork-a-repo">https://docs.github.com/en/get-started/quickstart/fork-a-repo</a>
 
 <h3>Executing program</h3>
 Run directly in IDEs
-<br>
+<br><br>
 Or
-<br>
+<br><br>
 Do the following in the terminal (the following example is run in the Windows PowerShell):
 <br><br>
 <ol>
@@ -55,7 +67,8 @@ Do the following in the terminal (the following example is run in the Windows Po
 </ol>
 
 <h2>Author</h2>
-<strong>Zhen Wei Liao</strong> - <a href="www.linkedin.com/in/zhenwei-liao-148baa273">@Zhen</a>
+<strong>Zhen Wei Liao</strong> - <a href="https://www.linkedin.com/in/zhenwei-liao-148baa273">@Zhen</a>
+
 <h2>License</h2>
 This project is under the MIT License. <br>Please check the LICENSE.md file for more information.
 
