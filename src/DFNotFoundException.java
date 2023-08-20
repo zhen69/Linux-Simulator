@@ -1,7 +1,7 @@
 package src;
 
 /**
- * The DFNotFoundException class inherit all behaviors and properties of the Exception class.
+ * The DFNotFoundException class inherits all behaviors and properties of the Exception class.
  * This exception is thrown when a directory or file is not found in the current File Hierarchy Structure.
  *
  * @author Zhen Wei Liao
