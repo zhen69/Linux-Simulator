@@ -75,8 +75,7 @@ public class BashTerminal {
     }
 
     /**
-     * Determines which rm command should be run (rm or rm -r)
-     * based on <code>args[0]</code> and <code>args[1]</code>.
+     * Determines which rm command should be run (rm or rm -r) based on <code>args[0]</code>.
      *
      * <code>args[2], args[3], args[4]...</code> indicates the directories/files to be removed
      * from the working directory.
